@@ -1,8 +1,5 @@
 #include "operations.h"
 
-#include <stdio.h>
-#include <unistd.h>
-
 #define MAX_VAL 0xFFFFFFFF;
 
 static inline int get_sign(int a)
@@ -59,14 +56,10 @@ static int div_same(int a, int b)
 	int ret = 0;
 	int a_sub = a;
 	int first_sign = get_sign(a);
-	int ctl = first_sign == get_sign(a_sub);
-	while(ctl && a_sub)
+	while(first_sign == get_sign(a_sub) && a_sub)
 	{
 		ret++;
 		a_sub = subtract(a_sub, b);
-		ctl = first_sign == get_sign(a_sub);
-		printf("a_sub = %d, ctl = %08X\n", a_sub, ctl);
-		usleep(100000);
 	}
 
 	if(a_sub)
