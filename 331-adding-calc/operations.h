@@ -3,8 +3,19 @@
 
 #define MAX_VAL 0xFFFFFFFF
 
-int subtract(int a, int b);
-int multiply(int a, int b);
-int divide(int a, int b);
+typedef enum
+{
+	operation_success,
+	operation_dividebyzero,
+	operation_underflow,
+	operation_overflow,
+	operation_nonintegral,
+	operation_unknownerror,
+} operation_result;
+
+operation_result subtract(int a, int b, int *res);
+operation_result multiply(int a, int b, int *res);
+operation_result divide(int a, int b, int *res);
+operation_result exponential(int a, int b, int *res);
 
 #endif

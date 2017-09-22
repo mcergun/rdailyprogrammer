@@ -17,13 +17,16 @@ int main(int argc, char **argv)
 			ans = a + b;
 			break;
 		case '-':
-			ans = subtract(a, b);
+			subtract(a, b, &ans);
 			break;
 		case '*':
-			ans = multiply(a, b);
+			multiply(a, b, &ans);
 			break;
 		case '/':
-			ans = divide(a, b);
+			divide(a, b, &ans);
+			break;
+		case '^':
+			exponential(a, b, &ans);
 			break;
 		}
 		printf("%s %s %s = %d\n", argv[1], argv[2], argv[3],
