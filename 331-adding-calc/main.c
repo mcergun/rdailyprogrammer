@@ -3,6 +3,15 @@
 
 #include "operations.h"
 
+char * operation_result_strings[] = {
+	"",
+	"divide by zero",
+	"underflow",
+	"overflow",
+	"non integral",
+	"unknown error",
+};
+
 int main(int argc, char **argv)
 {
 	if(argc > 3)
@@ -11,26 +20,30 @@ int main(int argc, char **argv)
 		char op = *argv[2];
 		int b = atoi(argv[3]);
 		int ans = 0;
+		operation_result ret = operation_success;
 		switch(op)
 		{
 		case '+':
 			ans = a + b;
 			break;
 		case '-':
-			subtract(a, b, &ans);
+			ret = subtract(a, b, &ans);
 			break;
 		case '*':
-			multiply(a, b, &ans);
+			ret = multiply(a, b, &ans);
 			break;
 		case '/':
-			divide(a, b, &ans);
+			ret = divide(a, b, &ans);
 			break;
 		case '^':
-			exponential(a, b, &ans);
+			ret = exponential(a, b, &ans);
 			break;
 		}
-		printf("%s %s %s = %d\n", argv[1], argv[2], argv[3],
-			ans);
+		if(ret == operation_success)
+			printf("%s %s %s = %d\n", argv[1], argv[2], argv[3],
+				ans);
+		else
+			printf("operation failed: %s\n", operation_result_strings[ret]);
 	}
 	else
 	{
