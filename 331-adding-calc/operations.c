@@ -1,16 +1,24 @@
 #include "operations.h"
 
-#define MAX_VAL 0xFFFFFFFF;
-
 static inline int get_sign(int a)
 {
 	return a < 0;
 }
 
+static inline int is_same_sign(int a, int b)
+{
+	return get_sign(a) == get_sign(b);
+}
+
 // 1s inverse of the given integer
 static int inverse1(int a)
 {
-	int ret = a ^ MAX_VAL;
+	int ret = 0;
+	while(a < MAX_VAL)
+	{
+		ret++;
+		a++;
+	}
 	return ret;
 }
 
@@ -70,10 +78,9 @@ static int div_same(int a, int b)
 
 int divide(int a, int b)
 {
-	int same_sign = (~a ^ b) & 0x80000000;
 	int ret = 0;
 
-	if(same_sign)
+	if(is_same_sign(a, b))
 		ret = div_same(a, b);
 	else
 		ret = inverse2(div_same(a, inverse2(b)));
