@@ -120,7 +120,7 @@ operation_result exponential(int a, int b, int *res)
 	}
 	else
 	{
-		for (int i = 0; i < b - 1; ++i)
+		for (int i = 1; i < b; ++i)
 		{
 			multiply(*res, a, res);
 		}
